@@ -37,6 +37,7 @@ def dereference_client_users_allowed_actions_for_client(client_users_list):
 
     permission_ids = list()
     cu_api_user_map = dict()
+
     for au in api_users:
         if au.get("user_role"):
             for r in au.get("user_role"):
@@ -50,6 +51,7 @@ def dereference_client_users_allowed_actions_for_client(client_users_list):
     route_ids = list()
     for pid in permission_ids:
         route_ids += RESOLVED_PERMISSIONS.get(pid, list())
+        
 
     # Query for all relevant routes and remap them route_id: route
     routes = list(mongo.routes.find({'_id': {'$in': route_ids}}))
